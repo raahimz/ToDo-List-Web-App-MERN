@@ -48,10 +48,18 @@ function App() {
         setTimeout(() => getTasks(), serverResponseDelay);
     }
 
-    function completeTask(id) {
+    function completeTask(id, completed) {
         const options = {
-            url: 'http://localhost:3000/tasks/complete/' + id,
-            method: 'GET',
+            url: 'http://localhost:3000/tasks/complete',
+            method: 'POST', 
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+            data: {
+                id: id,
+                completed: completed,
+            }
         };
 
         axios(options)

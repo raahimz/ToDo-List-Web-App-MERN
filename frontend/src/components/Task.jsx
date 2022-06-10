@@ -21,7 +21,7 @@ function Task(props) {
             <ThemeProvider theme={theme}>
                 <div className="task" style={{backgroundColor: colour}}>
                     <Stack spacing={1} direction="row">
-                        <Button variant="text" onClick={() => props.completeTask(props.id)}>{ !completed ? <CheckCircleOutlineRoundedIcon/> : <CheckCircleIcon/>}</Button>
+                        <Button variant="text" onClick={() => props.completeTask(props.id, !completed)}>{ !completed ? <CheckCircleOutlineRoundedIcon/> : <CheckCircleIcon/>}</Button>
                         <Typography variant="body1" style={{color: 'white', fontSize: '18px', marginTop: '5px'}}>
                             {props.text}
                         </Typography>

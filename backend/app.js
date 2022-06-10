@@ -7,7 +7,7 @@ app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/tasksDB', {useNewURLParser: true});
+mongoose.connect('mongodb+srv://admin-raahim:digital10@cluster0.rjmzd.mongodb.net/?retryWrites=true&w=majority/tasksDB', {useNewURLParser: true});
 
 const taskSchema = new mongoose.Schema({
     text: {type: String, required: true},
@@ -39,17 +39,17 @@ app.delete('/tasks/delete/:id', (req, res) => {
         .catch(err => res.status(400).json(err));
 });
 
-app.get('/tasks/complete/:id', (req, res) => {
-    const id = req.params.id;
-
-    Task.findById(id)
-        .then(response => {
-            Task.findByIdAndUpdate(id, {'completed': !response.completed})
-                .then(() => res.json('Updated task!'))
-                .catch(err => res.status(400).json(err));
-        });
+app.post('/tasks/complete', (req, res) => {
+    const id = req.body.id;
+    const completed = req.body.completed;
+    
+    Task.findByIdAndUpdate(id, {'completed': completed})
+        .then(() => res.json('Updated task!'))
+        .catch(err => res.status(400).json(err));
 })
 
-app.listen('3000', () => {
-    console.log("Server running at port 3000");
+const port = process.env.port || 3000
+
+app.listen(port, () => {
+    console.log("Server running at port " + port);
 })
