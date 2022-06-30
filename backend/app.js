@@ -7,7 +7,7 @@ app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://admin-raahim:digital10@cluster0.rjmzd.mongodb.net/?retryWrites=true&w=majority/tasksDB', {useNewURLParser: true});
+mongoose.connect('invalid', {useNewURLParser: true});
 
 const taskSchema = new mongoose.Schema({
     text: {type: String, required: true},
